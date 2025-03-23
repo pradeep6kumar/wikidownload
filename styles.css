@@ -8,35 +8,96 @@
   width: 100%;
 }
 
+/* Style for tables to highlight them on hover */
+.wiki-table-container:hover {
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
 .wiki-table-download-btn {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 24px;
-  height: 24px;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
   background-color: #4CAF50; /* Green color */
   border-radius: 50%;
   cursor: pointer;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 .wiki-table-download-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   background-color: #45a049;
+  opacity: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Download icon (arrow down) */
+/* Download icon (arrow down) with improved appearance */
 .wiki-table-download-btn::after {
   content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
+  display: block;
+  width: 18px;
+  height: 18px;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>');
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* Initially hide the download button and show on hover */
+.wiki-table-container .wiki-table-download-btn {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.wiki-table-container:hover .wiki-table-download-btn {
+  opacity: 0.9;
+  transform: scale(1);
+}
+
+/* Add a tooltip */
+.wiki-table-download-btn::before {
+  content: 'Download as CSV';
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  bottom: 45px;
+  right: 0;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.wiki-table-download-btn:hover::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Loading animation */
+.wiki-table-download-btn.loading {
+  background-color: #2E7D32;
+  pointer-events: none;
+}
+
+.wiki-table-download-btn.loading::after {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 4V2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10c0-4.42-2.9-8.14-6.91-9.41L14 4c3.03 1.05 5 3.97 5 7 0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/></svg>');
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 } 

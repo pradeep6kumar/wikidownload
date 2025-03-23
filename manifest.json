@@ -1,11 +1,12 @@
 {
   "manifest_version": 2,
   "name": "Wiki Table Downloader",
-  "version": "1.0",
-  "description": "Download Wikipedia tables as CSV files",
+  "version": "1.0.1",
+  "description": "Download Wikipedia tables as CSV files with a beautiful, unobtrusive interface",
   "icons": {
     "48": "icons/icon-48.png",
-    "96": "icons/icon-96.png"
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
   },
   "permissions": [
     "activeTab",
@@ -15,12 +16,16 @@
     {
       "matches": ["*://*.wikipedia.org/*"],
       "js": ["content.js"],
-      "css": ["styles.css"]
+      "css": ["styles.css"],
+      "run_at": "document_end"
     }
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "wikitabledownloader@example.com"
+      "id": "wikitabledownloader@example.com",
+      "strict_min_version": "58.0"
     }
-  }
+  },
+  "author": "Pradeep",
+  "homepage_url": "https://github.com/pradeep6kumar/wikidownload"
 } 
